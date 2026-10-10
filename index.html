@@ -131,7 +131,6 @@
             font-weight: bold;
             border-color: #ffd700;
         }
-        /* Scrollbar styling for navbar - Webkit (Chrome, Safari, Edge) */
         .nav::-webkit-scrollbar {
             height: 4px;
         }
@@ -146,8 +145,6 @@
         .nav::-webkit-scrollbar-thumb:hover {
             background: #e6c200;
         }
-        
-        /* ========== END NAVBAR ========== */
         
         hr {
             border: 0;
@@ -366,7 +363,6 @@
             .nav a { font-size: 12px; padding: 4px 10px; }
             .video-description { padding-right: 20px; }
         }
-        /* Dynamic page style */
         .dynamic-page {
             max-width: 950px;
             margin: 20px auto;
@@ -384,6 +380,246 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
         }
+
+        /* ========== AI SEARCH STYLES ========== */
+        .ai-float-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #006b54, #00b894);
+            color: #fff;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0,107,84,0.5);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: aiPulse 2s infinite;
+        }
+        .ai-float-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 8px 25px rgba(0,107,84,0.7);
+        }
+        @keyframes aiPulse {
+            0% { box-shadow: 0 0 0 0 rgba(0,107,84,0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(0,107,84,0); }
+            100% { box-shadow: 0 0 0 0 rgba(0,107,84,0); }
+        }
+
+        .ai-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        .ai-modal-overlay.active {
+            display: flex;
+        }
+
+        .ai-chat-box {
+            width: 100%;
+            max-width: 480px;
+            height: 90vh;
+            max-height: 620px;
+            background: linear-gradient(160deg, #ffffff 0%, #f0f8ff 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: aiSlideUp 0.4s ease;
+            border: 2px solid #006b54;
+        }
+        @keyframes aiSlideUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .ai-chat-header {
+            background: linear-gradient(135deg, #006b54, #00b894);
+            color: white;
+            padding: 15px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 18px 18px 0 0;
+        }
+        .ai-chat-header h3 {
+            color: white;
+            border: none;
+            padding: 0;
+            margin: 0;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ai-close-btn {
+            background: rgba(255,255,255,0.25);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ai-close-btn:hover {
+            background: rgba(255,255,255,0.5);
+            transform: rotate(90deg);
+        }
+
+        .ai-chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            scroll-behavior: smooth;
+        }
+        .ai-chat-messages::-webkit-scrollbar { width: 6px; }
+        .ai-chat-messages::-webkit-scrollbar-track { background: #eef9f6; border-radius: 10px; }
+        .ai-chat-messages::-webkit-scrollbar-thumb { background: #006b54; border-radius: 10px; }
+
+        .ai-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            word-wrap: break-word;
+            animation: aiMsgIn 0.3s ease;
+        }
+        @keyframes aiMsgIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .ai-msg.user {
+            align-self: flex-start;
+            background: linear-gradient(135deg, #006b54, #008e6f);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        .ai-msg.bot {
+            align-self: flex-end;
+            background: #ffffff;
+            color: #333;
+            border: 1px solid #d5eee7;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        .ai-msg.bot a { color: #006b54; text-decoration: underline; }
+
+        .ai-typing {
+            align-self: flex-end;
+            background: #fff;
+            border: 1px solid #d5eee7;
+            padding: 12px 18px;
+            border-radius: 15px;
+            display: flex;
+            gap: 5px;
+        }
+        .ai-typing span {
+            width: 8px; height: 8px;
+            background: #006b54;
+            border-radius: 50%;
+            animation: aiTyping 1.2s infinite;
+        }
+        .ai-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes aiTyping {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-6px); opacity: 1; }
+        }
+
+        .ai-chat-input-area {
+            display: flex;
+            padding: 12px;
+            background: #ffffff;
+            border-top: 1px solid #d5eee7;
+            gap: 8px;
+        }
+        .ai-chat-input-area input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #d5eee7;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            font-family: inherit;
+            transition: 0.2s;
+            direction: rtl;
+        }
+        .ai-chat-input-area input:focus {
+            border-color: #006b54;
+            box-shadow: 0 0 0 3px rgba(0,107,84,0.12);
+        }
+        .ai-send-btn {
+            background: linear-gradient(135deg, #006b54, #00b894);
+            color: white;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            flex-shrink: 0;
+        }
+        .ai-send-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 12px rgba(0,107,84,0.4);
+        }
+        .ai-send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .ai-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 0 12px 10px;
+            background: #fff;
+        }
+        .ai-suggestion-chip {
+            background: #eef9f6;
+            color: #006b54;
+            border: 1px solid #b8e0d4;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+        .ai-suggestion-chip:hover {
+            background: #006b54;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .ai-float-btn { width: 58px; height: 58px; font-size: 26px; bottom: 18px; left: 18px; }
+            .ai-chat-box { height: 88vh; max-height: none; border-radius: 16px; }
+            .ai-msg { font-size: 0.9rem; }
+        }
+        /* ========== END AI SEARCH STYLES ========== */
     </style>
 </head>
 <body>
@@ -458,7 +694,6 @@
         <p>🌐 <a href="https://www.fatwaqa.com/ur">https://www.fatwaqa.com/ur</a></p>
         <p>🌐 <a href="https://daruliftaahlesunnat.net/ur">https://daruliftaahlesunnat.net/ur</a></p>
         
-        <!-- Daruliftah Mustafaiya Links -->
         <div style="background: #f0f8ff; border: 2px solid #006b54; border-radius: 8px; padding: 15px; margin: 20px 0;">
             <h3 style="color: #004d3d; border-bottom: 2px solid #006b54; padding-bottom: 8px;">🕌 دارالافتاء مصطفائیہ - M.FAREED MUSTAFAI</h3>
             <p style="font-weight: bold; color: #006b54;">یہ لنک بھی دارالافتاء اہلسنت کے تحت ہیں، مگر مصطفائی نسبت کے ساتھ:</p>
@@ -763,7 +998,6 @@
         <h2>🎥 Important Videos - Complete List (1-139)</h2>
         <p style="font-size:1.1rem; color:#006b54;">ذیل میں تمام اہم ویڈیوز کے لنک درج ہیں۔</p>
         <hr>
-        <!-- Videos 1-60 -->
         <div class="video-item"><span class="video-number">1.</span> <a href="https://youtu.be/GHyj_a_A-3s" target="_blank">https://youtu.be/GHyj_a_A-3s</a></div>
         <div class="video-description">ڈیجیٹل تصویر کے حوالے سے ویڈیو</div>
 
@@ -794,7 +1028,6 @@
         <div class="video-item"><span class="video-number">10.</span> <a href="https://youtu.be/6Qbsek6d-Cc" target="_blank">https://youtu.be/6Qbsek6d-Cc</a></div>
         <div class="video-description">ویڈیو از: Islamic Digital Studio</div>
 
-        <!-- Videos 11-60 -->
         <div class="video-item"><span class="video-number">11.</span> <a href="https://youtu.be/Nugncx78ZK0" target="_blank">https://youtu.be/Nugncx78ZK0</a></div>
         <div class="video-description">ویڈیو از: Islamic Digital Studio</div>
 
@@ -945,7 +1178,6 @@
         <div class="video-item"><span class="video-number">60.</span> <a href="https://www.youtube.com/live/iu-tCJi5_eQ" target="_blank">https://www.youtube.com/live/iu-tCJi5_eQ</a></div>
         <div class="video-description">زکوٰۃ سیمینار</div>
 
-        <!-- Videos 61-115 (Daruliftah Videos) -->
         <div class="video-item"><span class="video-number">61.</span> <a href="https://youtu.be/GfluIz35jAA" target="_blank">https://youtu.be/GfluIz35jAA</a></div>
         <div class="video-description">فتاویٰ اہلسنت کا بیان</div>
         
@@ -1111,7 +1343,6 @@
         <div class="video-item"><span class="video-number">115.</span> <a href="https://youtu.be/o6mdF-GymXQ" target="_blank">https://youtu.be/o6mdF-GymXQ</a></div>
         <div class="video-description">سُنّتِ نبوی کا بیان (دوبارہ)</div>
 
-        <!-- Videos 116-122 (Other Platform Videos) -->
         <div class="video-item"><span class="video-number">116.</span> <a href="https://youtu.be/HcbUP5uzfXc" target="_blank">https://youtu.be/HcbUP5uzfXc</a></div>
         <div class="video-description">ٹک ٹاک کے لیے ویڈیو</div>
 
@@ -1133,7 +1364,6 @@
         <div class="video-item"><span class="video-number">122.</span> <a href="https://youtu.be/djLRY63PtH4?si=A8TU5xuXe7ZBnunf" target="_blank">https://youtu.be/djLRY63PtH4?si=A8TU5xuXe7ZBnunf</a></div>
         <div class="video-description">اسکرین شاٹ ٹیکسٹ ایڈٹ کرنے کا طریقہ</div>
 
-        <!-- Videos 123-139 -->
         <div class="video-item"><span class="video-number">123.</span> <a href="https://youtu.be/7GtJQWoiaXA?si=M89-E4ujx5-dFpmr" target="_blank">https://youtu.be/7GtJQWoiaXA?si=M89-E4ujx5-dFpmr</a></div>
         <div class="video-description">نئی ویڈیو</div>
 
@@ -1308,6 +1538,36 @@
     <p style="font-size:0.9rem; color:#555; margin-top:5px;">🚀 Website Complete - Ready for WhatsApp Hosting</p>
 </footer>
 
+<!-- ========== AI SEARCH START ========== -->
+<button class="ai-float-btn" id="aiFloatBtn" title="AI Search">🤖</button>
+
+<div class="ai-modal-overlay" id="aiModalOverlay">
+    <div class="ai-chat-box">
+        <div class="ai-chat-header">
+            <h3>🤖 AI Search Assistant</h3>
+            <button class="ai-close-btn" id="aiCloseBtn">✖</button>
+        </div>
+        <div class="ai-chat-messages" id="aiChatMessages">
+            <div class="ai-msg bot">
+                السلام علیکم! 👋<br>
+                میں آپ کا AI اسسٹنٹ ہوں۔ آپ ویب سائٹ کے بارے میں کچھ بھی پوچھ سکتے ہیں — جیسے ویڈیوز، لنکس، دارالافتاء، کانٹیکٹ، پوسٹس، وغیرہ۔
+            </div>
+        </div>
+        <div class="ai-suggestions" id="aiSuggestions">
+            <button class="ai-suggestion-chip" data-q="Contact">📞 Contact</button>
+            <button class="ai-suggestion-chip" data-q="Daruliftah">⚖️ Daruliftah</button>
+            <button class="ai-suggestion-chip" data-q="Videos">🎥 Videos</button>
+            <button class="ai-suggestion-chip" data-q="Books">📚 Books</button>
+            <button class="ai-suggestion-chip" data-q="Posts">📝 Posts</button>
+        </div>
+        <div class="ai-chat-input-area">
+            <input type="text" id="aiUserInput" placeholder="یہاں سوال لکھیں..." autocomplete="off">
+            <button class="ai-send-btn" id="aiSendBtn">➤</button>
+        </div>
+    </div>
+</div>
+<!-- ========== AI SEARCH END ========== -->
+
 <script>
     // ========== FIREBASE CONFIG ==========
     const firebaseConfig = {
@@ -1355,7 +1615,6 @@
         database.ref('pages').once('value').then((snapshot) => {
             const pages = snapshot.val() || {};
             
-            // Get existing nav links
             const existingLinks = nav.querySelectorAll('a');
             const existingIds = [];
             existingLinks.forEach(link => {
@@ -1365,13 +1624,11 @@
                 }
             });
             
-            // Add Firebase dynamic pages that don't exist
             for (const [id, page] of Object.entries(pages)) {
                 if (!existingIds.includes(id) && page.title) {
                     const newLink = document.createElement('a');
                     newLink.href = '#' + id;
                     newLink.textContent = page.title;
-                    // Insert before admin link if exists
                     const adminLink = nav.querySelector('a[href="../admin.html"]');
                     if (adminLink) {
                         nav.insertBefore(newLink, adminLink);
@@ -1388,15 +1645,12 @@
 
     // ========== SHOW DYNAMIC PAGE ==========
     function showDynamicPage(hash) {
-        // Check if this is a Firebase dynamic page
         database.ref('pages').once('value').then((snapshot) => {
             const pages = snapshot.val() || {};
             
             if (pages[hash]) {
-                // Check if element already exists
                 let targetEl = document.getElementById(hash);
                 if (!targetEl) {
-                    // Create new element
                     const container = document.querySelector('.container');
                     const newDiv = document.createElement('div');
                     newDiv.id = hash;
@@ -1417,7 +1671,6 @@
     window.addEventListener('hashchange', function() {
         const hash = window.location.hash.replace('#', '');
         
-        // Hide all posts and dynamic pages
         document.querySelectorAll('.post').forEach(el => {
             el.classList.remove('active');
             el.style.display = 'none';
@@ -1427,27 +1680,22 @@
             el.style.display = 'none';
         });
         
-        // Show the target page if it's a default page
         const targetEl = document.getElementById(hash);
         if (targetEl && targetEl.classList.contains('post')) {
             targetEl.style.display = 'block';
             targetEl.classList.add('active');
         } else {
-            // Check if it's a dynamic page
             showDynamicPage(hash);
         }
         
-        // Update active nav - scroll to make active link visible
         document.querySelectorAll('.nav a').forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href') === '#' + hash) {
                 link.classList.add('active');
-                // Scroll to make active link visible
                 link.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             }
         });
         
-        // Load posts if hash is posts
         if (hash === 'posts') {
             loadPosts();
         }
@@ -1455,21 +1703,16 @@
 
     // ========== DOM READY ==========
     document.addEventListener('DOMContentLoaded', function() {
-        // Load Firebase pages into nav
         loadFirebasePages();
         
-        // Initial load for posts if hash is posts
         if (window.location.hash === '#posts') {
             loadPosts();
         }
         
-        // If hash is a dynamic page, show it
         const hash = window.location.hash.replace('#', '');
         if (hash) {
-            // Check if it's not a default page
             const defaultIds = ['about','darulifta','board','tech','packages','contact','privacy','terms','services','product','jamiah','tiktok','daaru','videos','darulifta-videos','other-videos','vercel','dailymotion','jawahir','allinfo','islamicdate','books','ahlesunnatboard','gmail','idswebsite','posts'];
             if (!defaultIds.includes(hash)) {
-                // Hide default pages
                 document.querySelectorAll('.post').forEach(el => {
                     el.style.display = 'none';
                 });
@@ -1477,7 +1720,222 @@
             }
         }
     });
+
+    // ========== AI SEARCH LOGIC ==========
+    (function() {
+        const floatBtn = document.getElementById('aiFloatBtn');
+        const overlay = document.getElementById('aiModalOverlay');
+        const closeBtn = document.getElementById('aiCloseBtn');
+        const sendBtn = document.getElementById('aiSendBtn');
+        const userInput = document.getElementById('aiUserInput');
+        const messagesBox = document.getElementById('aiChatMessages');
+        const suggestions = document.getElementById('aiSuggestions');
+
+        // ===== Build knowledge base from the page =====
+        function collectStaticData() {
+            const data = [];
+            // Collect all sections in .post
+            document.querySelectorAll('.post').forEach(post => {
+                const id = post.id || '';
+                const titleEl = post.querySelector('h2, h3');
+                const title = titleEl ? titleEl.innerText.trim() : id;
+                // Remove scripts/styles from clone
+                const clone = post.cloneNode(true);
+                clone.querySelectorAll('script, style').forEach(el => el.remove());
+                const text = clone.innerText.replace(/\s+/g, ' ').trim();
+                // Collect all links with their text
+                const links = [];
+                clone.querySelectorAll('a').forEach(a => {
+                    const href = a.getAttribute('href') || '';
+                    const label = a.innerText.trim();
+                    if (href && href !== '#' && !href.startsWith('#')) {
+                        links.push({ label, href });
+                    }
+                });
+                if (text || links.length) {
+                    data.push({ id, title, text, links, source: 'HTML' });
+                }
+            });
+            return data;
+        }
+
+        // ===== Collect Firebase posts (admin-added) =====
+        async function collectFirebaseData() {
+            const out = [];
+            try {
+                // posts
+                const postsSnap = await database.ref('posts').once('value');
+                const posts = postsSnap.val() || {};
+                Object.entries(posts).forEach(([key, post]) => {
+                    out.push({
+                        id: 'post-' + key,
+                        title: post.title || 'Post',
+                        text: (post.title || '') + ' ' + (post.content || ''),
+                        links: [],
+                        source: 'Admin Posts'
+                    });
+                });
+                // pages
+                const pagesSnap = await database.ref('pages').once('value');
+                const pages = pagesSnap.val() || {};
+                Object.entries(pages).forEach(([id, page]) => {
+                    out.push({
+                        id: 'page-' + id,
+                        title: page.title || id,
+                        text: (page.title || '') + ' ' + (page.content || '').replace(/<[^>]+>/g, ' '),
+                        links: [],
+                        source: 'Admin Pages'
+                    });
+                });
+            } catch (e) {
+                console.warn('Firebase data load failed:', e);
+            }
+            return out;
+        }
+
+        // ===== Search =====
+        function normalize(s) {
+            return (s || '').toString().toLowerCase().trim();
+        }
+
+        function searchKnowledge(query, allData) {
+            const q = normalize(query);
+            if (!q) return [];
+            const words = q.split(/\s+/).filter(w => w.length > 1);
+            const results = [];
+            allData.forEach(item => {
+                const titleN = normalize(item.title);
+                const textN = normalize(item.text);
+                let score = 0;
+                // title match
+                if (titleN.includes(q)) score += 10;
+                if (textN.includes(q)) score += 5;
+                // word matches
+                words.forEach(w => {
+                    if (titleN.includes(w)) score += 4;
+                    if (textN.includes(w)) score += 2;
+                });
+                // link label match
+                (item.links || []).forEach(l => {
+                    const ln = normalize(l.label);
+                    if (ln.includes(q)) score += 4;
+                    words.forEach(w => { if (ln.includes(w)) score += 2; });
+                });
+                if (score > 0) results.push({ ...item, score });
+            });
+            results.sort((a, b) => b.score - a.score);
+            return results.slice(0, 5);
+        }
+
+        // ===== Format answer =====
+        function formatAnswer(query, results) {
+            if (!results.length) {
+                return 'معذرت، مجھے اس سوال کا جواب ویب سائٹ کے مواد میں نہیں ملا۔ براہ کرم دوسرے الفاظ میں پوچھیں، یا <a href="#contact">Contact</a> سیکشن دیکھیں۔';
+            }
+            let html = '';
+            results.forEach((r, i) => {
+                const snippet = r.text.length > 260 ? r.text.slice(0, 260) + '…' : r.text;
+                html += `<div style="margin-bottom:10px;padding-bottom:8px;${i < results.length-1 ? 'border-bottom:1px dashed #cfe9e2;' : ''}">`;
+                html += `<strong style="color:#006b54;">${r.title}</strong>` +
+                        `<span style="font-size:0.75rem;color:#888;margin-right:6px;">(${r.source})</span><br>`;
+                html += `<span style="font-size:0.9rem;">${snippet}</span>`;
+                if (r.links && r.links.length) {
+                    html += '<div style="margin-top:5px;">';
+                    r.links.slice(0, 4).forEach(l => {
+                        html += `<a href="${l.href}" target="_blank" style="display:inline-block;margin:2px 4px 2px 0;font-size:0.82rem;">🔗 ${l.label || l.href}</a>`;
+                    });
+                    html += '</div>';
+                }
+                html += '</div>';
+            });
+            html += `<div style="font-size:0.8rem;color:#888;margin-top:6px;">🔍 "${query}" کے لیے ${results.length} نتیجے ملے</div>`;
+            return html;
+        }
+
+        // ===== UI helpers =====
+        function addMessage(html, who) {
+            const div = document.createElement('div');
+            div.className = 'ai-msg ' + who;
+            div.innerHTML = html;
+            messagesBox.appendChild(div);
+            messagesBox.scrollTop = messagesBox.scrollHeight;
+            return div;
+        }
+
+        function showTyping() {
+            const t = document.createElement('div');
+            t.className = 'ai-typing';
+            t.innerHTML = '<span></span><span></span><span></span>';
+            t.id = 'aiTypingIndicator';
+            messagesBox.appendChild(t);
+            messagesBox.scrollTop = messagesBox.scrollHeight;
+        }
+        function hideTyping() {
+            const t = document.getElementById('aiTypingIndicator');
+            if (t) t.remove();
+        }
+
+        // ===== Main send =====
+        let cachedData = null;
+
+        async function handleSend() {
+            const q = userInput.value.trim();
+            if (!q) return;
+            addMessage(q, 'user');
+            userInput.value = '';
+            sendBtn.disabled = true;
+            showTyping();
+
+            try {
+                if (!cachedData) {
+                    const htmlData = collectStaticData();
+                    const fbData = await collectFirebaseData();
+                    cachedData = [...htmlData, ...fbData];
+                }
+                // small delay for nicer UX
+                await new Promise(r => setTimeout(r, 350));
+                const results = searchKnowledge(q, cachedData);
+                hideTyping();
+                addMessage(formatAnswer(q, results), 'bot');
+            } catch (e) {
+                hideTyping();
+                addMessage('❌ معذرت، کچھ خرابی پیش آئی۔ دوبارہ کوشش کریں۔', 'bot');
+                console.error(e);
+            } finally {
+                sendBtn.disabled = false;
+                userInput.focus();
+            }
+        }
+
+        // ===== Events =====
+        floatBtn.addEventListener('click', () => {
+            overlay.classList.add('active');
+            setTimeout(() => userInput.focus(), 200);
+            // refresh data if not loaded
+            if (!cachedData) {
+                collectStaticData();
+                collectFirebaseData().then(fb => {
+                    cachedData = [...collectStaticData(), ...fb];
+                });
+            }
+        });
+        closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.classList.remove('active');
+        });
+        sendBtn.addEventListener('click', handleSend);
+        userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') handleSend();
+        });
+        suggestions.addEventListener('click', (e) => {
+            if (e.target.classList.contains('ai-suggestion-chip')) {
+                userInput.value = e.target.getAttribute('data-q');
+                handleSend();
+            }
+        });
+    })();
 </script>
+<!-- ========== AI SEARCH END ========== -->
 
 </body>
 </html>
